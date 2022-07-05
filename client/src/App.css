@@ -1,7 +1,8 @@
+@import 'antd/dist/antd.css';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 .App {
   text-align: center;
 }
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -27,7 +28,55 @@
 .App-link {
   color: #61dafb;
 }
+/* 네비게이션 */
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid 1px #e8e8e8;
+  box-shadow: 0 0 30px #f5f4f4;
 
+}
+.nav-left h2{
+  color: #1890ff;
+  letter-spacing: -1px;
+
+}
+.nav-items {
+  padding: 1.5rem;
+}
+.nav-right{
+  display: flex;
+  justify-content: space-around;
+}
+.nav-right a{
+  padding: 0 1rem;
+  color: #222;
+  font-weight: 600;
+}
+/* 로그인페이지 */
+.login-body {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+  flex-direction: column;
+}
+.login-body h2{
+  font-family: 'Noto Sans KR', sans-serif;
+  letter-spacing: 5px;
+  color: #1890ff;
+  padding: 1.5rem;
+  font-weight: bold;
+
+}
+.form-antd{
+  display: flex;
+  flex-direction: column;
+}
+  
+/* 회원가입 */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
