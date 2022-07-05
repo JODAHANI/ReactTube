@@ -3,7 +3,7 @@ import {
     LOGIN_USER,
     REGISTER_USER,
     AUTH_USER,
-    LOGOUT
+    // LOGOUT
 } from './types'
 
 
@@ -35,12 +35,12 @@ export function auth () {
         
 }
 
-export function logout() {
-    const req = axios.get('/api/logout').then(res => {
-        return res.data
-    })
-    return {
-        type: LOGOUT,
-        payload : req
-    }
-}
+// export function logout() {
+//     const req = axios.get('/api/logout').then(res => {
+//         return res.data
+//     })
+//     return {
+//         type: LOGOUT,
+//         payload : req
+//     }
+// }

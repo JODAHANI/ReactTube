@@ -11,7 +11,7 @@ export const auth = (req, res, next) => {
         }
         req.token = token;
         req.user = user
-        console.log(user,token)
+        // console.log(user,token)
         next();
     })
 }

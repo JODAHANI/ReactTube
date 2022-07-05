@@ -1,20 +1,18 @@
 import React from 'react'
-// import axios from 'axios's
+import axios from 'axios'
 import {
   Link, useNavigate
 } from "react-router-dom";
-import { useDispatch } from 'react-redux';
-import { logout } from '../../../_actions/user_actions';
 
 
 function RightMenu() {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
   const logoutHandler = () => {
-    dispatch(logout()).then(res => { 
-      console.log(res)
-      alert('로그아웃 되었습니다.')
-      navigate('/login')
+    axios.get('/api/logout').then(res => {
+      if (res.data.success) {
+        alert('로그아웃 되었습니다.')
+        navigate('/login')
+      }
     })
   }
   return (

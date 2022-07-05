@@ -65,7 +65,7 @@ userSchema.methods.generateToken = async function () {
 userSchema.statics.analyzer = function (token, cb) {
     var user = this;
     jwt.verify(token, process.env.HASH, function (err, decoded) {
-        user.findById(decoded, function (err, user) {
+        user.findOne({'_id' : decoded, 'token' : token}, function (err, user) {
             if (err) return cb(err);
             cb(null, user)
         })

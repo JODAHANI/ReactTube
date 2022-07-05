@@ -118,13 +118,13 @@ app.get('/api/logout',auth, async (req, res) => {
     {token : ""},
     {new : true}
   );
-  console.log(logoutUser)
-  return res.status(200).json({isAuth: false,err: true})
+  if(!logoutUser) return res.json({ success: false, err });
+  return res.json({ success: true });
 })
 
 app.get('/logout',auth, (req, res) => {
   User.findOneAndUpdate({_id: req.user._id,},{token : ""},(err,doc) => {
-    if(err) return res.status(400)
+    if(err) return res.json({ success: false, err });
     return res.status(200).json({isAuth: false,err: true})
   });
 })
