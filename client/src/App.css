@@ -37,9 +37,12 @@
   box-shadow: 0 0 30px #f5f4f4;
 
 }
-.nav-left h2{
+.nav-right a:hover{
   color: #1890ff;
+}
+.nav-left h2{
   letter-spacing: -1px;
+  padding: 0 0.5rem;
 
 }
 .nav-items {
@@ -66,7 +69,6 @@
 .login-body h2{
   font-family: 'Noto Sans KR', sans-serif;
   letter-spacing: 5px;
-  color: #1890ff;
   padding: 1.5rem;
   font-weight: bold;
 
