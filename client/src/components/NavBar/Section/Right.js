@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 import { useSelector } from 'react-redux';
-import { Menu} from 'antd';
 
 import {
   Link, useNavigate
@@ -23,9 +22,8 @@ function RightMenu() {
   if (user.userData && user.userData.isAuth) {
     return (
       <div className='nav-right nav-items'>
-        <Menu.Item key="cart">
-          <Link to="/">Home</Link>
-        </Menu.Item>
+        <Link to="/">Home</Link>
+        <Link to="/video/upload">Upload</Link>
         <Link to="/" onClick={logoutHandler}>Logout</Link>
       </div>
     )
