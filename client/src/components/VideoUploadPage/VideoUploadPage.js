@@ -1,27 +1,28 @@
 import React, { useState } from 'react'
 import Dropzone from 'react-dropzone'
 import { Form, Input, Select, Button, } from 'antd';
-import { PlusOutlined, UploadOutlined  } from '@ant-design/icons';
+import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 const { TextArea } = Input;
 const { Option } = Select;
 
 
 
 function VideoUploadPage() {
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState(null);
   const [inputComment, setinputComment] = useState('Select Video')
   const [Title, setTitle] = useState('')
   const [Description, setDescription] = useState('')
   const [Type, setType] = useState(0)
   const [Category, setCategory] = useState(0)
-  
+
+
+  function onDrop(file) {
+    let url = URL.createObjectURL(file[0])
+    setFiles(url);
+  }
 
   function formFinish() {
     console.log(Title, Description, Type, Category)
-  }
-  function onDrop(files) {
-    let url = URL.createObjectURL(files[0])
-    console.log(url)
   }
   const changeTitle = e => {
     setTitle(e.target.value)
@@ -53,21 +54,29 @@ function VideoUploadPage() {
       <Form className='upload-form' onFinish={formFinish}>
         <label>Thumnail</label>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Dropzone onDrop={onDrop} multiple={false}>
+          <Dropzone onDrop={onDrop} multiple={false} >
             {({ getRootProps, getInputProps }) => (
               <section>
                 {
-                  files.length < 0
-                  ? <div>하이</div>
-                  : <div className='drop-zone' style={{
-                    display: 'flex', width: '300px', height: '240px', border: '1px solid lightgray',
-                    borderRadius: '5px', marginBottom: '1rem', alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                    {...getRootProps()}>
-                    <input {...getInputProps()} />
-                    <PlusOutlined style={{ fontSize: '3rem', fontWeight: '400' }} />
-                  </div>
+                  files != null
+                    ? <div
+                      className='drop-zone' style={{
+                        display: 'flex', width: '300px', height: '240px', border: '1px solid lightgray',
+                        borderRadius: '5px', marginBottom: '1rem', alignItems: 'center',
+                        justifyContent: 'center', 
+                      }}
+                    >
+                      <img src={files} alt='img' style={{display:'block',width:'100%', height:'100%'}}/>
+                    </div>
+                    : <div className='drop-zone' style={{
+                      display: 'flex', width: '300px', height: '240px', border: '1px solid lightgray',
+                      borderRadius: '5px', marginBottom: '1rem', alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                      {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      <PlusOutlined style={{ fontSize: '3rem', fontWeight: '400' }} />
+                    </div>
                 }
               </section>
             )}
@@ -75,7 +84,7 @@ function VideoUploadPage() {
         </div>
         <label>Video</label>
         <label className='label' htmlFor='video-input'><UploadOutlined /> {inputComment}</label>
-        <Input type='file' id='video-input' onChange={changeVideo} required  />
+        <Input type='file' id='video-input' onChange={changeVideo} required />
         <label htmlFor='title'>Title</label>
         <Input id='title' required onChange={changeTitle} />
         <label htmlFor='description'>description</label>
