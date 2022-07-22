@@ -2,9 +2,8 @@ import express from "express"
 import mongoose from "mongoose"
 import path from 'path';
 import cookieParser from "cookie-parser";
-import userRouter from "./routes/users";
-import videoRouter from "./routes/video";
-
+import userRouter from "./server/routes/users";
+import videoRouter from "./server/routes/video";
 import 'dotenv/config' 
 
 
@@ -19,16 +18,16 @@ mongoose.connect(process.env.MONGO_URI)
 })
 
 app.set('view engine', 'pug');
-app.set("views", path.join(__dirname, "views"));
+// app.set("views", path.join(__dirname, "views"));
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
 
+app.use('/uploads', express.static('uploads'));
 app.use('/api/users',userRouter)
 app.use('/api/video',videoRouter)
-
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

@@ -12,7 +12,7 @@ function RightMenu() {
   const user = useSelector(state => state.user)
   const navigate = useNavigate()
   const logoutHandler = () => {
-    axios.get('/api/logout').then(res => {
+    axios.get('/api/users/logout').then(res => {
       if (res.data.success) {
         alert('로그아웃 되었습니다.')
         navigate('/login')
