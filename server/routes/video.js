@@ -1,9 +1,10 @@
 import express from 'express';
 const videoRouter = express.Router();
-const multer = require('multer');
+import multer from 'multer'
 import path from 'path'
 import fs from 'fs'
 import sharp from 'sharp';
+import Video from '../models/Video';
 
 
 var storage = multer.diskStorage({
@@ -28,7 +29,6 @@ const videoUpload = multer({ storage : videoStorage }).single('file')
 
 videoRouter.post("/thumbnail-upload-files", (req, res) => {
     upload(req, res, err => {
-        console.log(res.req)
         if (err) {
             return res.json({ success: false, err })
         }  else {
@@ -62,16 +62,34 @@ videoRouter.post("/thumbnail-delete",  (req, res) => {
     
 })
 
-videoRouter.post("/upload", (req, res) => {
+videoRouter.post("/video-save", (req, res) => {
     videoUpload(req, res, err => {
-        console.log(res.req.file)
         if (err) {
             return res.json({ success: false, err })
         }  
-        return res.json({success : true})
+        let filePath = res.req.file.path;
+        let fileName = res.req.file.filename;
+        return res.json({success : true, filePath,fileName})
     })
    
 })
 
+
+videoRouter.post("/upload-video", async (req, res) => {
+    const video = await Video.create(req.body)
+    console.log(video)
+    return res.json({success : true ,video})   
+})
+
+videoRouter.get('/get-videos', async (req,res) => {
+    const video = await Video.find().populate('writer')
+    return res.json({success : true ,video})   
+}) 
+
+videoRouter.post('/get-video', async (req,res) => {
+    const {body : {id}} = req;
+    let video = await Video.findById(id).populate('writer')
+    return res.json({success : true , video})   
+}) 
 
 export default videoRouter

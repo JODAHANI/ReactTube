@@ -1,8 +1,10 @@
 @import 'antd/dist/antd.css';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
 .App {
   text-align: center;
 }
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -12,6 +14,12 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+h2,
+h3,
+h4 {
+  margin: 0;
 }
 
 .App-header {
@@ -28,6 +36,7 @@
 .App-link {
   color: #61dafb;
 }
+
 /* 네비게이션 */
 .navigation {
   display: flex;
@@ -37,26 +46,32 @@
   box-shadow: 0 0 30px #f5f4f4;
 
 }
-.nav-right a:hover{
+
+.nav-right a:hover {
   color: #1890ff;
 }
-.nav-left h2{
+
+.nav-left h2 {
   letter-spacing: -1px;
   padding: 0 0.5rem;
 
 }
+
 .nav-items {
   padding: 1.5rem;
 }
-.nav-right{
+
+.nav-right {
   display: flex;
   justify-content: space-around;
 }
-.nav-right a{
+
+.nav-right a {
   padding: 0 1rem;
   color: #222;
   font-weight: 600;
 }
+
 /* 로그인페이지 */
 .login-body {
   width: 100%;
@@ -66,26 +81,31 @@
   height: 85vh;
   flex-direction: column;
 }
-.login-body h2{
+
+.login-body h2 {
   font-family: 'Noto Sans KR', sans-serif;
   letter-spacing: 5px;
   padding: 1.5rem;
   font-weight: bold;
 
 }
-.form-antd{
+
+.form-antd {
   display: flex;
   flex-direction: column;
 }
+
 /* 업로드페이지 */
 .drop-zone:hover {
   cursor: pointer;
 }
+
 .upload-form label {
   display: block;
   font-weight: 500;
   padding: 0.5rem 1rem
 }
+
 /* .upload-form input {} */
 
 .upload-form textarea {
@@ -94,7 +114,8 @@
   resize: none;
 
 }
-.label{
+
+.label {
   display: block;
   border: 1px solid #d9d9d9;
   border-radius: 2px;
@@ -102,17 +123,21 @@
   padding: 0.5rem 2rem !important;
   transition: all 0.2s;
 }
+
 .label span {
   transition: all 0.2s;
   margin-right: 1rem;
 }
-.label:hover{ 
+
+.label:hover {
   border: 1px solid #1890ff;
   color: #1890ff;
 }
-.label:hover span{
+
+.label:hover span {
   color: #1890ff;
-} 
+}
+
 input[type="file"] {
   position: absolute;
   width: 0;
@@ -122,12 +147,56 @@ input[type="file"] {
   border: 0;
 }
 
-  
+/* 랜딩 페이지 */
+.video-card:hover {
+  cursor: pointer;
+}
+
+.ant-card-meta-title {
+  margin: 0 !important;
+}
+
+.ant-card-meta-description {
+  margin-bottom: 3px !important;
+}
+
+/* 디테일 페이지 */
+.subscribe-btn {
+  cursor: pointer;
+  padding : 0.6rem 1.5rem;
+  border : none;
+  border-radius: 30px;
+  background-color: #1890ff;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+.unsubscribe-btn {
+  cursor: pointer;
+  padding : 0.6rem 1.5rem;
+  border : none;
+  border-radius: 30px;
+  background-color: #4c555c;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+.subscribe-btn:hover {
+  background-color:#40a9ff
+}
+.unsubscribe-btn:hover {
+  background-color:#a5a5a5
+}
+
+p {
+  margin: 0;
+}
 /* 회원가입 */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

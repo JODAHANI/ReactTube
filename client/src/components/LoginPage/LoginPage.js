@@ -1,39 +1,42 @@
 /* eslint-disable */
-import React from 'react'
-import { Button, Form, Input } from 'antd';
+import React, { useState } from 'react'
+import { Button, Form, Input, message } from 'antd';
 import { loginUser } from '../../_actions/user_actions';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
   let dispatch = useDispatch();
-  let navigate  = useNavigate();
-  
+  let navigate = useNavigate();
+  const [form] = Form.useForm();
   const onFinish = (values) => {
     let email = values.email;
     let password = values.password;
-
     let data = {
       email,
       password
     }
 
     dispatch(loginUser(data)).then(res => {
-      if(res.payload.loginSuccess) {
+      if (res.payload.loginSuccess) {
+        message.success('로그인 되었습니다.', 1)
         navigate('/')
       } else {
-        setEmail('')
-        setPassword('')
-        alert(res.payload.message)
+        form.setFieldsValue({
+          email: '',
+          password: '',
+        });
+        message.error(res.payload.message, 1);
       }
     });
-    
+
   };
 
 
   return (
     <div className='login-body'>
       <Form
+        form={form}
         className='form-antd'
         name="basic"
         labelCol={{ span: 8 }}

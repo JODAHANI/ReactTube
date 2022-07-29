@@ -1,6 +1,7 @@
 import express from "express";
 import User from "../models/User";
 import {auth} from '../middleware/auth'
+import Subscriber from "../models/Subscriber";
 const userRouter = express.Router();
 
 
@@ -49,6 +50,10 @@ userRouter.post('/register', async (req, res) => {
   } else {
     let user = await User.create({name,email,password})
     console.log(user)
+    let subscriber = await Subscriber.create({
+      userTo : user._id
+    })
+    console.log(subscriber)
     return res.status(200).json({success : true})
   }
 })

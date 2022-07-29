@@ -1,0 +1,10 @@
+video, .video-detail .ant-card-meta-avatar{
+    cursor: pointer;
+}
+.video-detail .ant-card-meta-title {
+    font-weight: bold;
+    cursor: pointer;
+}
+.ant-card-meta-description {
+    color: #777;
+}

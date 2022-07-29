@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import {
   Link, useNavigate
 } from "react-router-dom";
+import { message } from 'antd';
 
 
 
@@ -14,7 +15,7 @@ function RightMenu() {
   const logoutHandler = () => {
     axios.get('/api/users/logout').then(res => {
       if (res.data.success) {
-        alert('로그아웃 되었습니다.')
+        message.success('로그아웃 되었습니다.',1)
         navigate('/login')
       }
     })

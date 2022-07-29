@@ -78,7 +78,7 @@ function Register() {
   
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit" >
-            Login
+            Register
           </Button>
         </Form.Item>
       </Form>

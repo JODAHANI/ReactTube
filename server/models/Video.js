@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-const Schema = mongoose.Schema
 
 const videoSchema = new mongoose.Schema({
     writer : {
@@ -23,12 +22,14 @@ const videoSchema = new mongoose.Schema({
         type : Number,
         default : 0
     },
-    thumbnail : {
+    thumbnailPath : {
         type : String
-    }
-    
+    },
+    videoPath : {
+        type : String
+    },
 },{timestamps : true})
 
 
-const video = mongoose.model('User', videoSchema)
-export default video
+const Video = mongoose.model('Video', videoSchema)
+export default Video

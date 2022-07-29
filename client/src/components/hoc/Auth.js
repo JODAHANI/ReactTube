@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { auth } from '../../_actions/user_actions';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,6 +12,7 @@ export default function Auth(props) {
 function AuthCheck(props) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    let user = useSelector(state => state.user)
     useEffect(() => {
         dispatch(auth()).then((res) => {
             let passport = res.payload.isAuth;
@@ -34,8 +36,8 @@ function AuthCheck(props) {
                 }
             }
         })
-    },);
+    },[]);
     return (
-        <props.Component />
+        <props.Component navigate={navigate} user={user}/>
     )
 }

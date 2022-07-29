@@ -1,8 +1,8 @@
-/*lint */
+/* eslint-disable */
 import React, { useState } from 'react'
 import Dropzone from 'react-dropzone'
 import axios from 'axios';
-import { Form, Input, Select, Button, } from 'antd';
+import { Form, Input, Select, Button, message, } from 'antd';
 import { PlusOutlined, UploadOutlined, CloseOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 const { TextArea } = Input;
@@ -10,10 +10,8 @@ const { Option } = Select;
 
 
 
-function VideoUploadPage() {
-  const user = useSelector(state => state.user);
-  // const [Files, setFiles] = useState(null);
-  const [VideoPath, setVideoPath] = useState('')
+
+function VideoUploadPage(props) {
   const [VideoFile, setVideoFile] = useState('')
   const [ThumnailPath, setThumnailPath] = useState('')
   const [inputComment, setinputComment] = useState('Select Video')
@@ -22,7 +20,7 @@ function VideoUploadPage() {
   const [Privacy, setPrivacy] = useState(0)
   const [Category, setCategory] = useState(0)
 
-  function dropCancleHandler() {
+  function dropCancleHandler(props) {
     setThumnailPath('')
     const body = {
       ThumnailPath: ThumnailPath
@@ -39,25 +37,13 @@ function VideoUploadPage() {
     formData.append('file', files[0]);
 
     axios.post('/api/video/thumbnail-upload-files', formData, config).then(res => {
-      setThumnailPath(res.data.filePath)
+      if(res.data.err) {
+        props.navigate('/video/upload')
+      } else {
+        setThumnailPath(res.data.filePath)
+      }
     })
   }
-
-  // function onSubmit(e) {
-  //   console.log(e)
-  //   // axios.post('/api/video/upload',VideoFile).then(res => {
-  //   //   console.log(res.data)
-  //   // })
-  //   // const body = {
-  //   //   writer: user.userData.id,
-  //   //   title: Title,
-  //   //   description: Description,
-  //   //   privacy: Privacy,
-  //   //   category: Category,
-  //   //   thumbnail: ThumnailPath,
-  //   // }
-  //   // console.log(body)
-  // }
   const changeTitle = e => {
     setTitle(e.target.value)
   }
@@ -73,14 +59,6 @@ function VideoUploadPage() {
   const changeVideo = e => {
     let file = e.target.files[0];
     file['path'] = file.name;
-    let formData = new FormData();
-    const config = {
-      header: { 'content-type': 'multipart/form-data' }
-    }
-    formData.append('file',file)
-    axios.post('/api/video/upload',formData,config).then(res => {
-      console.log(res.data)
-    })
     setVideoFile(file)
     setinputComment(file.name)
   }
@@ -88,25 +66,39 @@ function VideoUploadPage() {
     console.log('Failed:', errorInfo);
   };
   const onFinish = () => {
-    // axios.post('/api/video/upload',VideoFile).then(res => {
-    //     console.log(res.data)
+    let formData = new FormData();
+    const config = {
+      header: { 'content-type': 'multipart/form-data' }
+    }
+    formData.append('file', VideoFile)
+    // axios.post('/api/video/upload',formData,config).then(res => {
+    //   console.log(res.data)
     // })
-    // const body = {
-    //   writer: user.userData.id,
-    //   title: Title,
-    //   description: Description,
-    //   privacy: Privacy,
-    //   category: Category,
-    //   thumbnail: ThumnailPath,
-    // }
+    axios.post('/api/video/video-save', formData, config).then(res => {
+      if (res.data.success) {
+        const body = {
+          writer: props.user.userData.id,
+          title: Title,
+          description: Description,
+          privacy: Privacy,
+          category: Category,
+          thumbnailPath: ThumnailPath,
+          videoPath: res.data.filePath,
+        }
+        axios.post('/api/video/upload-video', body).then(res => {
+          if (res.data.success) {
+            message.success('업로드 성공 ✔')
+            props.navigate('/')
+          }
+        })
+      }
+    })
   };
-
-
   const Continents = [
     { key: 1, value: "Film & Animation" },
     { key: 2, value: "Documentary" },
     { key: 3, value: "Fun" },
-    { key: 4, value: "Sport" },
+    { key: 4, value: "Sports" },
     { key: 5, value: "Music" },
     { key: 6, value: "Food & Mukbang" },
     { key: 7, value: "Pets & Animals" },
