@@ -10,11 +10,11 @@ export default function Auth(props) {
 }
 
 function AuthCheck(props) {
+    let user = useSelector(state => state.user)
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    let user = useSelector(state => state.user)
     useEffect(() => {
-        dispatch(auth()).then((res) => {
+        dispatch(auth()).then(res => {
             let passport = res.payload.isAuth;
             let option = props.option;
             // Not Loggined in Status 
@@ -36,7 +36,7 @@ function AuthCheck(props) {
                 }
             }
         })
-    },[]);
+    },[navigate]);
     return (
         <props.Component navigate={navigate} user={user}/>
     )

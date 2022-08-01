@@ -10,6 +10,7 @@ import {
 export async function loginUser (dataTosubmit) {
     let user = await axios.post('/api/users/login',dataTosubmit);
     user = user.data
+    console.log(user)
     return {
         type : LOGIN_USER,
         payload: user
@@ -19,7 +20,6 @@ export async function loginUser (dataTosubmit) {
 export async function registerUser (dataTosubmit) {
     let result = await axios.post('/api/users/register',dataTosubmit);
     result = result.data
-    
     return {
         type : REGISTER_USER,
         payload : result

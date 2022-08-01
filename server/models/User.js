@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    subscriber : {
+        type : Number,
+        default : 0
+    },
     image: String,
     token: {
         type: String,

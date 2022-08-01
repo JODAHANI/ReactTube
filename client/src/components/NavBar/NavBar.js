@@ -6,7 +6,7 @@ function NavBar() {
   return (
     <nav className='navigation'>
       <LeftMenu />
-      <RightMenu  />
+      <RightMenu />
     </nav>
   )
 }

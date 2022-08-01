@@ -3,11 +3,9 @@ import React, { useState } from 'react'
 import { Button, Form, Input, message } from 'antd';
 import { loginUser } from '../../_actions/user_actions';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
-function LoginPage() {
+function LoginPage(props) {
   let dispatch = useDispatch();
-  let navigate = useNavigate();
   const [form] = Form.useForm();
   const onFinish = (values) => {
     let email = values.email;
@@ -19,8 +17,9 @@ function LoginPage() {
 
     dispatch(loginUser(data)).then(res => {
       if (res.payload.loginSuccess) {
+        window.localStorage.setItem('userId', res.payload.userId);
         message.success('로그인 되었습니다.', 1)
-        navigate('/')
+        props.navigate('/')
       } else {
         form.setFieldsValue({
           email: '',

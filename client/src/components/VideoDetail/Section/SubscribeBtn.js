@@ -1,9 +1,9 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react'
 import { CheckOutlined,SmileOutlined } from '@ant-design/icons';
 import axios from 'axios'
 
 function SubscribeBtn(props) {
-    const [ManageSubscriber, setManageSubscriber] = useState(null)
     const [CheckSubscriber, setCheckSubscriber] = useState(false)
     useEffect(() => {
         let data = {
@@ -11,7 +11,7 @@ function SubscribeBtn(props) {
         }
         axios.post('/api/subscribe/', data).then(res => {
             if (res.data.success) {
-                setManageSubscriber(res.data.subscriber)
+                console.log(res.data.subscriber)
                 let videoHost = res.data.subscriber
                 let currentUser = props.user.userData.id
                 let find = videoHost.userFrom.indexOf(currentUser);
@@ -30,7 +30,14 @@ function SubscribeBtn(props) {
                 setCheckSubscriber(true)
             })
         } else {
-            console.log(CheckSubscriber)
+            let body = { 
+                userToId : props.userTo,
+                userFromId : props.user.userData.id
+            }
+            axios.post('/api/subscribe/on-subscribe',body).then(res => {
+                console.log(res.data)
+                setCheckSubscriber(false)
+            })
         }
     }
     return (

@@ -1,9 +1,10 @@
 /* eslint-disable */
 import React from 'react'
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import { registerUser } from '../../_actions/user_actions';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
 
 function Register() {
   const [form] = Form.useForm()
@@ -18,11 +19,11 @@ function Register() {
     }
     dispatch(registerUser(body)).then(res => {
       if(!res.payload.success) {
-        alert(res.payload.err)
+        message.error('res.payload.err', 1);
         form.resetFields()
       } 
       if(res.payload.success) {
-        alert('로그인 해주시길 바랍니다.')
+        message.success('로그인 해주시기 바랍니다.', 1);
         navigate('/login')
         form.resetFields()
       }

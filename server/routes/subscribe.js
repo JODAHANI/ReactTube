@@ -19,6 +19,11 @@ subscribe.post("/on-subscribe",  async (req, res) => {
     let find = subscriber.userFrom.indexOf(userFromId)
     if(find === -1) {
         subscriber.userFrom.push(userFromId)
+        subscriber.total = subscriber.total + 1;
+        await subscriber.save()
+    } else {
+        subscriber.userFrom.splice(find, 1);
+        subscriber.total = subscriber.total - 1;
         await subscriber.save()
     }
     return res.json({success: true, subscriber});

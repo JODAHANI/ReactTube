@@ -9,15 +9,15 @@ const { Meta } = Card;
 
 
 function LangdingPage(props) {
+  const [Video, setVideo] = useState([])
+  console.log(Video)
   useEffect(() => {
     axios.get('/api/video/get-videos').then(res => {
       if (res.data.success) {
         setVideo(res.data.video)
-        console.log(res.data.video)
       }
     })
   }, [])
-  const [Video, setVideo] = useState([])
   const renderCards = Video.map((video, i) =>
     <Col lg={6} md={8} xs={24} key={i} className='video-card'>
       <Link to={`/video/detail/${video._id}`}>
