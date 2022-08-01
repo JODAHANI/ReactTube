@@ -2,6 +2,9 @@ import express from "express";
 import User from "../models/User";
 import {auth} from '../middleware/auth'
 import Subscriber from "../models/Subscriber";
+import Video from "../models/Video";
+
+
 const userRouter = express.Router();
 
 
@@ -66,6 +69,13 @@ userRouter.get('/logout',auth, async (req, res) => {
   );
   if(!logoutUser) return res.json({ success: false, err });
   return res.json({ success: true });
+})
+
+userRouter.get('/:id', async (req,res) => {
+  const { params : { id } } = req;
+  const video  = await Video.find({writer : id})
+  const user  = await User.findById(id)
+  return res.json({ success: true,user,video });
 })
 
 // app.get('/logout',auth, (req, res) => {

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Row, Col, Card, Avatar } from 'antd';
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import axios from 'axios';
 import moment from 'moment';
 import '../assets/VideoDetail.css'
@@ -13,6 +13,7 @@ const { Meta } = Card;
 
 
 function VideoDetail(props) {
+    const [Subscriber,setSubscriber] = useState(null)
     const [Video, setVideo] = useState(null)
     const [UserTo, setUserTo] = useState('')
     let { videoId } = useParams();
@@ -55,19 +56,25 @@ function VideoDetail(props) {
                                             display: 'flex',
                                             justifyContent: 'center',
                                         }}>
-                                            <div style={{ width: '50px', textAlign: 'center' }}>
+                                            <div className='channel-move' style={{ width: '50px', textAlign: 'center' }}>
+                                            <Link className='channel-move' to={`/users/channel/${UserTo}`}>
                                                 <img
                                                     src='https://joeschmoe.io/api/v1/random'
                                                     alt='img'
                                                     style={{ width: '80%' }}
                                                 />
+                                            </Link>
                                             </div>
                                         </div>
                                         <div style={{ flex: 6, marginLeft: '1rem' }}>
-                                            <p style={{ fontWeight: 'bold' }}>{Video.writer.name}</p>
-                                            <p style={{ color: '#777' }}>구독자 : {Video.writer.subscriber}명</p>
+                                            <Link className='channel-move' to={`/users/channel/${UserTo}`}>
+                                                <p style={{ fontWeight: 'bold' }}>{Video.writer.name}</p>
+                                            </Link>
+                                            <p style={{ color: '#777' }}>구독자 : {
+                                            Subscriber == null ? Video.writer.subscriber : Subscriber
+                                            }명</p>
                                         </div>
-                                        <SubscribeBtn userTo={UserTo} user={props.user}/>
+                                        <SubscribeBtn userTo={UserTo} user={props.user} setSubscriber={setSubscriber}/>
                                     </div>
                                 </Card>
                             </div>

@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react'
-import { CheckOutlined,SmileOutlined } from '@ant-design/icons';
+import { CheckOutlined, SmileOutlined } from '@ant-design/icons';
 import axios from 'axios'
 
 function SubscribeBtn(props) {
@@ -20,36 +20,42 @@ function SubscribeBtn(props) {
         })
     }, [])
     const subscriptionManagement = () => {
-        if(!CheckSubscriber) {
-            let body = { 
-                userToId : props.userTo,
-                userFromId : props.user.userData.id
+        if (!CheckSubscriber) {
+            let body = {
+                userToId: props.userTo,
+                userFromId: props.user.userData.id
             }
-            axios.post('/api/subscribe/on-subscribe',body).then(res => {
-                console.log(res.data)
-                setCheckSubscriber(true)
+            axios.post('/api/subscribe/on-subscribe', body).then(res => {
+                if (res.data.success) {
+                    console.log(res.data)
+                    setCheckSubscriber(true)
+                    props.setSubscriber(res.data.subscriber.total)
+                }
             })
         } else {
-            let body = { 
-                userToId : props.userTo,
-                userFromId : props.user.userData.id
+            let body = {
+                userToId: props.userTo,
+                userFromId: props.user.userData.id
             }
-            axios.post('/api/subscribe/on-subscribe',body).then(res => {
-                console.log(res.data)
-                setCheckSubscriber(false)
+            axios.post('/api/subscribe/on-subscribe', body).then(res => {
+                if (res.data.success) {
+                    console.log(res.data)
+                    setCheckSubscriber(false)
+                    props.setSubscriber(res.data.subscriber.total)
+                }
             })
         }
     }
     return (
         <div>
-            {!CheckSubscriber 
+            {!CheckSubscriber
                 ? <button className='subscribe-btn' onClick={subscriptionManagement}>
                     <SmileOutlined />
-                    <span style={{marginLeft: '0.5rem'}}>subscribe</span>
+                    <span style={{ marginLeft: '0.5rem' }}>subscribe</span>
                 </button>
                 : <button className='unsubscribe-btn' onClick={subscriptionManagement}>
                     <CheckOutlined />
-                    <span style={{marginLeft: '0.5rem'}}>subscribing</span>
+                    <span style={{ marginLeft: '0.5rem' }}>subscribing</span>
                 </button>
             }
         </div>
