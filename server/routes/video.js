@@ -91,5 +91,30 @@ videoRouter.post('/get-video', async (req,res) => {
     let video = await Video.findById(id).populate('writer')
     return res.json({success : true , video})   
 }) 
+videoRouter.get('/remove/:id', async (req,res) => {
+    const {params : {id}} = req;
+    const video = await Video.findByIdAndDelete(id);
+    console.log(video)
+    return res.json({success : true })   
+}) 
+
+videoRouter.post('/edit', async (req,res) => {
+    const {
+        body : {
+            id,
+            title,
+            description,
+            privacy,
+            category
+        }
+    } = req
+    const video = await Video.findOneAndUpdate(
+        id,
+        {title,description,privacy,category},
+        {new : true}
+        )
+    return res.json({success : true , video})   
+}) 
+
 
 export default videoRouter

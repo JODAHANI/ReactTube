@@ -12,6 +12,7 @@ import VideoUploadPage from "./VideoUploadPage/VideoUploadPage";
 import VideoDetail from "./VideoDetail/VideoDetail";
 import Auth from './hoc/Auth'
 import Channel from "./Channel/Channel";
+import EditVideo from "./EditVideo/EditVideo";
 export default function App() {
   return (
     <Suspense fallback={(<div>Loading...</div>)}>
@@ -25,6 +26,7 @@ export default function App() {
             <Route path="/video/upload" element={<Auth Component={VideoUploadPage} option={true} adminRoute={null} />} />
             <Route path="/video/detail/:videoId" element={<Auth Component={VideoDetail} option={true} adminRoute={null} />} />
             <Route path="/users/channel/:id" element={<Auth Component={Channel} option={true} adminRoute={null} />} />
+            <Route path="/video/edit/:id" element={<Auth Component={EditVideo} option={true} adminRoute={null} />} />
             {/* <Route path="/login" element={Auth(LoginPage,false)} />
           <Route path="/register" element={Auth(Register ,false)} /> */}
           </Routes>

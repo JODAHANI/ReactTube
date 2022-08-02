@@ -11,7 +11,6 @@ function SubscribeBtn(props) {
         }
         axios.post('/api/subscribe/', data).then(res => {
             if (res.data.success) {
-                console.log(res.data.subscriber)
                 let videoHost = res.data.subscriber
                 let currentUser = props.user.userData.id
                 let find = videoHost.userFrom.indexOf(currentUser);
@@ -27,7 +26,6 @@ function SubscribeBtn(props) {
             }
             axios.post('/api/subscribe/on-subscribe', body).then(res => {
                 if (res.data.success) {
-                    console.log(res.data)
                     setCheckSubscriber(true)
                     props.setSubscriber(res.data.subscriber.total)
                 }
@@ -39,7 +37,6 @@ function SubscribeBtn(props) {
             }
             axios.post('/api/subscribe/on-subscribe', body).then(res => {
                 if (res.data.success) {
-                    console.log(res.data)
                     setCheckSubscriber(false)
                     props.setSubscriber(res.data.subscriber.total)
                 }
