@@ -8,8 +8,9 @@ import moment from 'moment';
 import '../assets/VideoDetail.css'
 import Sidebar from './Section/Sidebar';
 import SubscribeBtn from './Section/SubscribeBtn';
-const { Meta } = Card;
+import Comment from './Section/Comment';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+const { Meta } = Card;
 
 
 
@@ -118,6 +119,9 @@ function VideoDetail(props) {
                                         <SubscribeBtn userTo={UserTo} user={props.user} setSubscriber={setSubscriber} />
                                     </div>
                                 </Card>
+                            </div>
+                            <div>
+                                <Comment currentUser={props.user} videoId={videoId}/>
                             </div>
                         </div>
                     </Col>

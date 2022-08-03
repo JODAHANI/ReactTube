@@ -4,7 +4,9 @@ import path from 'path';
 import cookieParser from "cookie-parser";
 import userRouter from "./server/routes/users";
 import videoRouter from "./server/routes/video";
-import subscribe from "./server/routes/subscribe";
+import subscribeRouter from "./server/routes/subscribe";
+import commentRouter from "./server/routes/comment";
+
 import 'dotenv/config' 
 
 
@@ -29,7 +31,8 @@ app.use(cookieParser());
 app.use('/uploads', express.static('uploads'));
 app.use('/api/users',userRouter)
 app.use('/api/video',videoRouter)
-app.use('/api/subscribe',subscribe)
+app.use('/api/subscribe',subscribeRouter)
+app.use('/api/comment',commentRouter)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

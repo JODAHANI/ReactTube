@@ -1,16 +1,16 @@
 import express from 'express';
 import Subscriber from '../models/Subscriber';
 import User from '../models/User'
-const subscribe = express.Router();
+const subscribeRouter = express.Router();
 
-subscribe.post("/",  async (req, res) => {
+subscribeRouter.post("/",  async (req, res) => {
     const {body : {userTo}} = req;
     let subscriber = await Subscriber.findOne({userTo});
     return res.json({success: true, subscriber});
 })
 
 
-subscribe.post("/on-subscribe",  async (req, res) => {
+subscribeRouter.post("/on-subscribe",  async (req, res) => {
     const {body  : {
         userToId,
         userFromId,
@@ -39,4 +39,4 @@ subscribe.post("/on-subscribe",  async (req, res) => {
 })
 
 
-export default subscribe
+export default subscribeRouter

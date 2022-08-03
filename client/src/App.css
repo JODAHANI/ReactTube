@@ -188,6 +188,36 @@ input[type="file"] {
   background-color:#a5a5a5
 }
 
+
+/* comment */
+.reply-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid lightgray;
+  padding: 0rem 0rem 0.2rem 1rem;
+}
+
+.reply-input:focus {
+  outline: none;
+  letter-spacing: 0px;
+}
+.reply-input:active {
+  outline: none;
+}
+.reply-input-under-line {
+  position: relative;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0%;
+  height: 2px;
+  background-color: #222;
+  transition: all 0.3s;
+}
+.reply-input:focus + .reply-input-under-line {
+  width: 100%;
+}
+
 p {
   margin: 0;
 }
